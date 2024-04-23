@@ -5,8 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class NewBehaviourScript : MonoBehaviour
 {
+   public AudioSource CoinSound;
+   //public AudioSource[];
+  // public AudioClip[];
 
-    public float moveSpeed;
+public float moveSpeed;
 
     float xInput;
     float yInput;
@@ -14,6 +17,7 @@ public class NewBehaviourScript : MonoBehaviour
     Rigidbody rb;
 
     int coinsCollected;
+   
 
     public GameObject WinText;
 
@@ -48,6 +52,15 @@ public class NewBehaviourScript : MonoBehaviour
         {
             coinsCollected++;
             other.gameObject.SetActive(false);
+           
+             CoinSound.Play();
+
+           // switch
+           // {
+             //   case 1
+             //   case 2
+           //}
+        
         }
 
         if (coinsCollected >=9)
