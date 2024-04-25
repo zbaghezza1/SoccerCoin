@@ -5,11 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class NewBehaviourScript : MonoBehaviour
 {
-   public AudioSource CoinSound;
-   //public AudioSource[];
-  // public AudioClip[];
+   
+   public AudioSource scaleSource;
+   public AudioClip [] scaleClip;
 
-public float moveSpeed;
+
+    public float moveSpeed;
 
     float xInput;
     float yInput;
@@ -25,6 +26,8 @@ public float moveSpeed;
     void Start()
     {
        rb=GetComponent<Rigidbody>();
+       
+       scaleClip = Resources.LoadAll<AudioClip>("Scale");
     }
 
     // Update is called once per frame
@@ -39,12 +42,14 @@ public float moveSpeed;
         }
 
     }
-
+    //private void Awake()
+   // {
+      //  audioClips = Resources.LoadAll<AudioClip>("Scale");
+    //}
     private void FixedUpdate()
     {
         rb.AddForce(xInput * moveSpeed,0, yInput * moveSpeed);
     }
-
 
     private void OnTriggerEnter(Collider other)
     {
@@ -52,15 +57,11 @@ public float moveSpeed;
         {
             coinsCollected++;
             other.gameObject.SetActive(false);
-           
-             CoinSound.Play();
 
-           // switch
-           // {
-             //   case 1
-             //   case 2
-           //}
-        
+            scaleSource.clip = scaleClip[0];
+            scaleSource.Play();
+   
+
         }
 
         if (coinsCollected >=9)
