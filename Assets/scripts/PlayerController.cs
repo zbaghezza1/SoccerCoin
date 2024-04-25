@@ -20,16 +20,16 @@ public class NewBehaviourScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       rb=GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        xInput=Input.GetAxis("Horizontal");
-        yInput=Input.GetAxis("Vertical");
+        xInput = Input.GetAxis("Horizontal");
+        yInput = Input.GetAxis("Vertical");
 
-        if (transform.position.y <=-5f)
+        if (transform.position.y <= -5f)
         {
             SceneManager.LoadScene(0);
         }
@@ -38,21 +38,22 @@ public class NewBehaviourScript : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.AddForce(xInput * moveSpeed,0, yInput * moveSpeed);
+        rb.AddForce(xInput * moveSpeed, 0, yInput * moveSpeed);
     }
 
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Coin" )
+        if (other.tag == "Coin")
         {
             coinsCollected++;
             other.gameObject.SetActive(false);
         }
 
-        if (coinsCollected >=9)
+        if (coinsCollected >= 9)
         {
             WinText.SetActive(true);
         }
     }
 }
+
