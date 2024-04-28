@@ -5,6 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class NewBehaviourScript : MonoBehaviour
 {
+   
+   [SerializeField]  AudioSource coinSound;
+   [SerializeField]  AudioClip[] scaleClip;
+
 
     public float moveSpeed;
 
@@ -14,13 +18,17 @@ public class NewBehaviourScript : MonoBehaviour
     Rigidbody rb;
 
     int coinsCollected;
+ 
 
     public GameObject WinText;
+    public GameObject Sound;
 
     // Start is called before the first frame update
     void Start()
     {
        rb=GetComponent<Rigidbody>();
+        coinSound.clip = scaleClip[0];
+
     }
 
     // Update is called once per frame
@@ -35,19 +43,22 @@ public class NewBehaviourScript : MonoBehaviour
         }
 
     }
-
+   
     private void FixedUpdate()
     {
         rb.AddForce(xInput * moveSpeed,0, yInput * moveSpeed);
     }
 
-
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Coin" )
+        if (other.tag == "Coin")
         {
             coinsCollected++;
             other.gameObject.SetActive(false);
+
+
+            coinSound.PlayOneShot(scaleClip[coinsCollected-1]);
+
         }
 
         if (coinsCollected >=9)
