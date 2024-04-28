@@ -6,8 +6,8 @@ using UnityEngine.SceneManagement;
 public class NewBehaviourScript : MonoBehaviour
 {
    
-   public AudioSource scaleSource;
-   public AudioClip [] scaleClip;
+   [SerializeField]  AudioSource coinSound;
+   [SerializeField]  AudioClip[] scaleClip;
 
 
     public float moveSpeed;
@@ -18,16 +18,17 @@ public class NewBehaviourScript : MonoBehaviour
     Rigidbody rb;
 
     int coinsCollected;
-   
+ 
 
     public GameObject WinText;
+    public GameObject Sound;
 
     // Start is called before the first frame update
     void Start()
     {
        rb=GetComponent<Rigidbody>();
-       
-       scaleClip = Resources.LoadAll<AudioClip>("Scale");
+        coinSound.clip = scaleClip[0];
+
     }
 
     // Update is called once per frame
@@ -42,10 +43,7 @@ public class NewBehaviourScript : MonoBehaviour
         }
 
     }
-    //private void Awake()
-   // {
-      //  audioClips = Resources.LoadAll<AudioClip>("Scale");
-    //}
+   
     private void FixedUpdate()
     {
         rb.AddForce(xInput * moveSpeed,0, yInput * moveSpeed);
@@ -53,14 +51,13 @@ public class NewBehaviourScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Coin" )
+        if (other.tag == "Coin")
         {
             coinsCollected++;
             other.gameObject.SetActive(false);
 
-            scaleSource.clip = scaleClip[0];
-            scaleSource.Play();
-   
+
+            coinSound.PlayOneShot(scaleClip[coinsCollected-1]);
 
         }
 
