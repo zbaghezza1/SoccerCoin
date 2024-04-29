@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class coin : MonoBehaviour
 {
-    public AudioSource coinSound;
+    
 
     public float rotateSpeed;
 
