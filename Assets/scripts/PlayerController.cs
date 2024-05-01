@@ -2,12 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class NewBehaviourScript : MonoBehaviour
 {
    
    [SerializeField]  AudioSource coinSound;
    [SerializeField]  AudioClip[] scaleClip;
+
+    public int scoreNumber;
+    public Text scoreText;
+    public int scoreValue = 1;
+
+   
+
 
 
     public float moveSpeed;
@@ -23,13 +31,25 @@ public class NewBehaviourScript : MonoBehaviour
     public GameObject WinText;
     public GameObject Sound;
 
+
+
+
+
+
+
+
     // Start is called before the first frame update
     void Start()
     {
        rb=GetComponent<Rigidbody>();
         coinSound.clip = scaleClip[0];
 
+        scoreNumber = 0;
+        scoreText.text = "Score: " + scoreNumber.ToString();
+
     }
+
+  
 
     // Update is called once per frame
     void Update()
@@ -48,6 +68,13 @@ public class NewBehaviourScript : MonoBehaviour
     {
         rb.AddForce(xInput * moveSpeed,0, yInput * moveSpeed);
     }
+    public void addScore()
+    {
+        scoreValue = scoreNumber++;
+
+        scoreText.text = "Score: " + scoreNumber.ToString();
+
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -60,6 +87,10 @@ public class NewBehaviourScript : MonoBehaviour
             coinSound.PlayOneShot(scaleClip[coinsCollected-1]);
             CountScore.scoreCount++;
 
+            addScore();
+           
+
+
         }
 
         if (coinsCollected >=9)
@@ -67,4 +98,7 @@ public class NewBehaviourScript : MonoBehaviour
             WinText.SetActive(true);
         }
     }
+  
+
 }
+
