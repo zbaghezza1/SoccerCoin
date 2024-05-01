@@ -85,6 +85,7 @@ public class NewBehaviourScript : MonoBehaviour
 
 
             coinSound.PlayOneShot(scaleClip[coinsCollected-1]);
+            CountScore.scoreCount++;
 
             addScore();
            
