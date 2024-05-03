@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Undefined
+  - Coin
+  - Soccer Ball
   layers:
   - Default
   - TransparentFX
