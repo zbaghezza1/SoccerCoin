@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class NewBehaviourScript : MonoBehaviour
+public class MovementJoystick : MonoBehaviour
 {
     // Start is called before the first frame update
     public GameObject joystick;

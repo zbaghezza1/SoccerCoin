@@ -14,7 +14,7 @@ public class NewBehaviourScript : MonoBehaviour
     public Text scoreText;
     public int scoreValue = 1;
 
-   
+    public MovementJoystick movementJoystick;
 
 
 
@@ -54,16 +54,18 @@ public class NewBehaviourScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        xInput=Input.GetAxis("Horizontal");
-        yInput=Input.GetAxis("Vertical");
 
-        if (transform.position.y <=-5f)
+        xInput = Input.GetAxis("Horizontal");
+        yInput = Input.GetAxis("Vertical");
+
+        if (transform.position.y <= -5f)
         {
             SceneManager.LoadScene(0);
         }
 
+
     }
-   
+
     private void FixedUpdate()
     {
         rb.AddForce(xInput * moveSpeed,0, yInput * moveSpeed);
@@ -71,7 +73,6 @@ public class NewBehaviourScript : MonoBehaviour
     public void addScore()
     {
         scoreValue = scoreNumber++;
-
         scoreText.text = "Score: " + scoreNumber.ToString();
 
     }
@@ -98,7 +99,24 @@ public class NewBehaviourScript : MonoBehaviour
             WinText.SetActive(true);
         }
     }
-  
+
+    void FixedUpdateJoystick()
+    {
+        if (movementJoystick.joystickVec.y != 0)
+        {
+            rb.velocity = new Vector2(movementJoystick.joystickVec.x * moveSpeed, movementJoystick.joystickVec.y * moveSpeed);
+
+        }
+
+        else
+        {
+            rb.velocity = Vector2.zero;
+        }
+
+
+
+    }
+
 
 }
 
